@@ -80,7 +80,7 @@ Our platform is inclusive, supporting multi-language content to cater to a globa
 
 ### Requirements
 
-- Node.js 14 and yarn
+- Node.js 14 and yarn 
 - Firebase [Authentication](https://firebase.google.com/docs/auth) and [Firestore](https://firebase.google.com/docs/firestore)
 
 ### Environment 

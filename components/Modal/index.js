@@ -15,6 +15,7 @@ export default function Modal({
   onClose,
   course,
   lesson,
+  section,
   submissionType,
   submissionText,
   submissionTitle,
@@ -50,21 +51,9 @@ export default function Modal({
       }
     }, [cohorts]);*/
 
-  const getSection = () => {
-    const section = Object.entries(course.sections)
-      .map((section) =>
-        section[1].map((item) => {
-          if (item.file.includes(lesson)) return section[0]
-        })
-      )
-      .flat()
-      .find(Boolean)
-    return section
-  }
   const saveLessonSubmission = async (userSubmission, submissionId) => {
-    if (!userSubmission) return toast.error('Você não pode enviar a lição sem resposta :)')
+    if (!userSubmission) return toast.error(t('messages.lesson_no_response'))
     if (!submissionId) submissionId = uuid()
-    const section = getSection()
     const content = {
       type: submissionType,
       value: userSubmission,
@@ -74,7 +63,7 @@ export default function Modal({
     onClose()
   }
   const saveUploadToStorage = async () => {
-    if (!file) return toast.error('Você precisa selecionar um arquivo para enviar')
+    if (!file) return toast.error(t('messages.file_needed'))
     setLoading(true)
     const submissionId = uuid()
     const storageRef = ref(storage, `lessons_submissions/${submissionId}`)
